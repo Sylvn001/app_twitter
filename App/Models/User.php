@@ -6,7 +6,7 @@ use MF\Model\Model;
 
 class User extends Model{
   
-   private $Id;
+   private $id;
    private $name;
    private $email;
    private $password;
@@ -62,11 +62,20 @@ class User extends Model{
    //authenticate 
    public function authenticate(){
        //
-       $sql = "SELECT email, password FROM users WHERE email = :email AND password = :password";
-       $stmt = $this->db->prepare($sql);
-       $stmt->bindValue("email:",$this->__get('email'));
-       $stmt->bindValue("password", $this->__get('password'));
-       
+       $sql = "SELECT id, name, email FROM users WHERE email = :email AND password = :password";
+       $stmt =  $this->db->prepare($sql);
+       $stmt->bindValue(':email', $this->__get('email'));
+       $stmt->bindValue(':password', $this->__get('password'));
+       $stmt->execute();
+
+       $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+       if($user['id'] != '' && $user['name'] != ''){
+           $this->__set('id', $user['id']);
+           $this->__set('name', $user['name']);
+       }
+    
+    return $this;
    }
 
 }
