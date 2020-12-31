@@ -12,7 +12,7 @@ class Connection{
     public static function getCon(){
         try{
             $con = new \PDO (
-                "mysql:host=localhost;dbname=minframework; charset=utf8",
+                "mysql:host=localhost;dbname=twitter; charset=utf8",
                 "root",
                 ""
             );
