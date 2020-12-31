@@ -49,16 +49,24 @@ class User extends Model{
        return $validate; 
    }
 
+   //recovery email and name
    public function getUserByEmail(){
-       $sql = "SELECT name, email from users where email = :email";
+       $sql = "SELECT name, email FROM users WHERE email = :email";
        $stmt =  $this->db->prepare($sql);
        $stmt->bindValue('email', $this->__get('email'));
        $stmt->execute();
 
        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
    }
-
-
-   //recovery user and email                    
+     
+   //authenticate 
+   public function authenticate(){
+       //
+       $sql = "SELECT email, password FROM users WHERE email = :email AND password = :password";
+       $stmt = $this->db->prepare($sql);
+       $stmt->bindValue("email:",$this->__get('email'));
+       $stmt->bindValue("password", $this->__get('password'));
+       
+   }
 
 }

@@ -5,11 +5,6 @@ namespace App\Controllers;
 use MF\Model\Container;
 use MF\Controller\Action;
 
-//Models
-use App\Models\Product;
-use App\Models\Info;
-
-
 class IndexController extends Action{
 
     public function index(){
