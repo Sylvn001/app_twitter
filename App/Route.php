@@ -43,6 +43,18 @@ class Route extends Bootstrap {
             'action' => 'loggout'
         );
 
+        $routes['tweet'] = array(
+            'route' => '/tweet',
+            'controller' => 'AppController',
+            'action' => 'tweet'
+        );
+
+        $routes['who_to_follow'] = array(
+            'route' => '/who_to_follow',
+            'controller' => 'AppController',
+            'action' => 'whoToFollow'
+        );
+
         $this->setRoutes($routes);
     }
 
