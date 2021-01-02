@@ -11,7 +11,7 @@ class AuthController extends Action{
         $user = Container::getModel('user');
 
         $user->__set('email', $_POST['email']);
-        $user->__set('password', $_POST['password']);
+        $user->__set('password', md5($_POST['password']));
 
         $user->authenticate(); 
       
@@ -24,7 +24,7 @@ class AuthController extends Action{
            header('Location: /timeline');
 
        }else{
-           header('Location: /login=erro');
+           header('Location: /?login=erro');
        }
 
     }
