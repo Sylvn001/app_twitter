@@ -86,8 +86,12 @@
 								
 									<div class="col-md-6 d-flex justify-content-end">
 										<div>
-											<a href="#" class="btn btn-success">Seguir</a>
-											<a href="#" class="btn btn-danger">Deixar de seguir</a>
+										<?php if($user['following'] == 0) { ?>
+											<a href="/action?act=follow&id_user=<?= $user['id'] ?>" class="btn btn-success">Seguir</a>
+										<?php } ?>
+										<?php if($user['following'] == 1) { ?>
+											<a href="/action?act=unfollow&id_user=<?= $user['id'] ?>" class="btn btn-danger">Deixar de seguir</a>
+										<?php } ?>
 										</div>
 									</div>
 								</div>

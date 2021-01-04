@@ -55,6 +55,12 @@ class Route extends Bootstrap {
             'action' => 'whoToFollow'
         );
 
+        $routes['action'] = array(
+            'route' => '/action',
+            'controller' => 'AppController',
+            'action' => 'action'
+        );
+
         $this->setRoutes($routes);
     }
 

@@ -79,13 +79,48 @@ class User extends Model{
    }
 
    public function getAll(){
-       $sql = "SELECT id, name, email FROM users WHERE name like :name";
+       $sql = "SELECT u.id, u.name, u.email, 
+                (
+                    SELECT 
+                        count(*)
+                    FROM 
+                        user_followers as uf 
+                    WHERE uf.id_user = :id_user AND uf.id_user_following = u.id
+                ) as following
+                FROM users as u
+                WHERE u.name like :name AND u.id != :id_user";
 
        $stmt = $this->db->prepare($sql);
        $stmt->bindValue(':name', '%' . $this->__get('name') . '%'); 
+       $stmt->bindValue(':id_user', $this->__get('id')); 
        $stmt->execute();
 
        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+   }
+
+   public function followUser($id_user_following){
+       $sql = "INSERT INTO user_followers (id_user, id_user_following) 
+               VALUES (:id_user, :id_user_following)";
+
+       $stmt = $this->db->prepare($sql);
+       $stmt->bindValue(':id_user', $this->__get('id'));
+       $stmt->bindValue(':id_user_following',$id_user_following);
+       $stmt->execute();
+
+       return true;
+
+   }
+
+   public function unfollowUser($id_user_following){
+    $sql = "DELETE FROM user_followers
+            WHERE id_user = :id_user AND id_user_following = :id_user_following";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':id_user', $this->__get('id'));
+    $stmt->bindValue(':id_user_following',$id_user_following);
+    $stmt->execute();
+
+    return true;
    }
 
 }

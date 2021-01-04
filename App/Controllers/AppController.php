@@ -45,10 +45,30 @@ class AppController extends Action{
         if($searchName != ''){
             $user = Container::getModel('User');
             $user->__set('name', $searchName);
+            $user->__set('id', $_SESSION['id']);
             $users = $user->getAll();
         }
       
         $this->view->users = $users;
         $this->render('whoToFollow');
+    }
+
+    public function action(){
+        $this->loginValidate();
+
+        $action = isset($_GET['act']) ? $_GET['act'] : '' ;
+        $id_user_following = isset($_GET['id_user']) ? $_GET['id_user'] : '' ;
+
+        $user = Container::getModel('User');
+        $user->__set('id', $_SESSION['id']);
+
+        if($action == 'follow'){
+            $user->followUser($id_user_following);
+        }else if($action == 'unfollow'){
+            $user->unfollowUser($id_user_following);
+        }
+
+        header('Location: /who_to_follow');
+        
     }
 }
