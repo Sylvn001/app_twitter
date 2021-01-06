@@ -8,7 +8,7 @@
 	  	<a class="menuItem" href="/loggout">
 	  		Sair
 	  	</a>
-			<img src="/img/twitter_logo.png" class="menuIco" />
+			<img src="/img/twitter.svg" class="menuIco" />
 	  </div>
 	</div>
 </nav>
@@ -16,36 +16,36 @@
 <div class="container mt-5">
 	<div class="row pt-2">
 		
-		<div class="col-md-3">
+		<div class="col-md-3" >
 
 			<div class="perfil">
-				<div class="perfilTopo">
+				<div class="profileTop">
 
 				</div>
 
-				<div class="perfilPainel">
+				<div class="profilePainel">
 					
 					<div class="row mt-2 mb-2">
 						<div class="col mb-2">
-							<span class="perfilPainelNome"> <?= $this->view->info_user['name'] ?> </span>
+							<span class="profilePainelNome"> <?= $this->view->info_user['name'] ?> </span>
 						</div>
 					</div>
 
 					<div class="row mb-2">
 
 						<div class="col">
-							<span class="perfilPainelItem">Tweets</span><br />
-							<span class="perfilPainelItemValor"><?= $this->view->total_tweets['total_tweets'] ?></span>
+							<span class="profilePainelItem">Tweets</span><br />
+							<span class="profilePainelItemValor"><?= $this->view->total_tweets['total_tweets'] ?></span>
 						</div>
 						
 						<div class="col">
-							<span class="perfilPainelItem">Seguindo</span><br />
-							<span class="perfilPainelItemValor"><?= $this->view->total_following['total_following'] ?></span>
+							<span class="profilePainelItem">Seguindo</span><br />
+							<span class="profilePainelItemValor"><?= $this->view->total_following['total_following'] ?></span>
 						</div>
 
 						<div class="col">
-							<span class="perfilPainelItem">Seguidores</span><br />
-							<span class="perfilPainelItemValor"><?= $this->view->total_followers['total_followers'] ?></span>
+							<span class="profilePainelItem">Seguidores</span><br />
+							<span class="profilePainelItemValor"><?= $this->view->total_followers['total_followers'] ?></span>
 						</div>
 
 					</div>
@@ -55,20 +55,23 @@
 
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-6" style="border: 1px solid;border-color: rgba(255,255,255,0.2);">
 			<div class="row mb-2">
-				<div class="col tweetBox">
-					<form method="post" action="/tweet">
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="tweet"></textarea>
+				<div class="col tweetBox p-0">
+					<h2 class="m-3 ">Pagina Inicial</h2>
+					<hr style="border-color: rgba(255,255,255,0.2);">
+					<form class="m-1" method="post" action="/tweet">
+						<textarea class="form-control" style="border-bottom: 1px solid rgba(255, 255, 255, 0.2);" id="tweet-text-form" placeholder="O que está acontecendo?" rows="3" name="tweet"></textarea>
 						
 						<div class="col mt-2 d-flex justify-content-end">
-							<button type="submit" class="btn btn-primary">Tweet</button>
+							<button type="submit" class="btn btn-primary m-2">Tweetar</button>
 						</div>
 
 					</form>
+					<div class="divisor"></div>
 				</div>
 			</div>
-
+			
 			<?php foreach($this->view->tweets as $id_tweet => $tweet) { ?>
 				<div class="row tweet">
 					<div class="col">
@@ -91,11 +94,28 @@
 
 
 		<div class="col-md-3">
-			<div class="quemSeguir">
-				<span class="quemSeguirTitulo">Quem seguir</span><br />
-				<hr />
-				<a href="/who_to_follow" class="quemSeguirTxt">Procurar por pessoas conhecidas</a>
+
+			<div style="background-color: rgb(25, 39, 52); border-radius: 25px;">
+				<!-- Search form -->
+				<form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+				<i class="fas fa-search" aria-hidden="true"></i>
+				<input style="background-color: transparent; border: none;" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Buscar no Twitter"
+					aria-label="Search">
+				</form>
 			</div>
+
+			<div class="whoToFollow">
+				<span class="whoToFollowTitulo m-2">O que está acontecendo</span><br />
+				<hr class="mt-1" style="border: 1px solid  rgba(255, 255, 255, 0.1);" />
+				<a href="/who_to_follow" class="whoToFollowTxt">Mostrar Mais</a>
+			</div>
+
+			<div class="whoToFollow">
+				<span class="whoToFollowTitulo m-2">Quem seguir</span><br />
+				<hr class="mt-1" style="border: 1px solid  rgba(255, 255, 255, 0.1);" />
+				<a href="/who_to_follow" class="whoToFollowTxt">Procurar por pessoas conhecidas</a>
+			</div>
+
 		</div>
 
 	</div>

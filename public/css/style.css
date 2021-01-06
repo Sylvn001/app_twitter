@@ -3,7 +3,13 @@ html, body {
 }
 
 body {
-	font-family: "Segoe UI", Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: rgb(21, 32, 43);
+    color: white;
+}
+
+.container{
+    max-width: 1250px;
 }
 
 h1 {
@@ -28,26 +34,66 @@ h2 {
 
 .banner {
 	height: 100%;
-	background-color: #1da1f2;
+    background: #74CAFE;
+}
+.banner div{
+    z-index: 15;
+}
+.logo{
+    background: url('../img/logo.svg');
+}
+
+.divisor{
+    background-color: #192734 ;
+    height: 10px;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#tweet-text-form{
+    background: transparent;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+
+.btn-primary{
+    background-color: #1da1f2;
+   
+}
+.btn-primary-outline{
+    border-color: #1da1f2;
+}
+.btn{
+    font-weight: 700;
+}
+.btn-primary:hover{
+    background-color: #2991d1;
 }
 
 .title {
 	color: #1da1f2;
-	font-size: 27px;
+    font-size: 36px;
+    width: 50%;
+    letter-spacing: 0.5px;
     line-height: 32px;
 }
 
 .subtitle {
-	color: #14171a;
+	color: #ffffff;
     font-size: 18px;
     line-height: 24px;
     margin: 16px auto;
 }
 
 .form-control {
-	background-color: #fff;
-    border: 1px solid #e6ecf0;
     border-radius: 3px;
+}
+
+.btn{
+    border-radius: 25px;
 }
 
 .comunicacao {
@@ -107,23 +153,23 @@ h2 {
     width: 100%;
 }
 
-.perfilTopo {
+.profileTop {
     height: 95px;
     background-color: #1DA1F2
 }
 
-.perfilPainel {
+.profilePainel {
     padding-right: 10px;
     padding-left: 10px;
 }
 
-.perfilPainelNome {
+.profilePainelNome {
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
 }
 
-.perfilPainelItem  {
+.profilePainelItem  {
     color: #657786;
     font-size: 12px;
     font-weight: bold;
@@ -133,7 +179,7 @@ h2 {
     transition: color .15s ease-in-out;
 }
 
-.perfilPainelItemValor {
+.profilePainelItemValor {
     display: block;
     font-size: 18px;
     font-weight: bold;
@@ -145,30 +191,30 @@ h2 {
 .tweetBox {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
-    border: 1px solid #e6ecf0;
-    background-color: #E8F5FD;
+    border: 1px solid  rgba(255, 255, 255, 0.1);
     padding:25px;
 }
 
-.quemSeguir {
-    border: 1px solid #e6ecf0;
-    background: #fff;
+.whoToFollow {
+    border-radius: 15px;
+    background-color: rgb(25, 39, 52);
     position: relative;
     margin-bottom: 10px;
     display: block;
     width: 100%;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
     padding-bottom: 10px;
 }
 
-.quemSeguirTitulo {
+.whoToFollowTitulo {
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
 }
 
-.quemSeguirTxt, .quemSeguirTxt:hover {
+.whoToFollowTxt, .whoToFollowTxt:hover {
     color: #1DA1F2;
     text-decoration: none;
     font-size: 12px;
@@ -177,10 +223,11 @@ h2 {
 
 .tweet {
     padding:15px;
-    border-bottom: 1px solid #e6ecf0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    
     cursor: pointer;
 }
 
 .tweet:hover {
-    background-color: #f5f8fa;
+    background-color: rgba(255, 255, 255, 0.2);
 }
