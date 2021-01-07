@@ -90,6 +90,10 @@ h2 {
 
 .form-control {
     border-radius: 3px;
+    color: white;
+}
+.form-control:focus{
+    color: white;
 }
 
 .btn{
@@ -115,24 +119,65 @@ h2 {
 }
 
 .menu {
-    background: #fff;
-    height: 46px;
-    border-bottom: 1px solid rgba(0,0,0,0.25);
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     z-index: 1000;
+    color: white
 }
 
-.menuItem, .menuItem:hover {
-    font-size: 13px;
-    font-weight: bold;
-    color: #1DA1F2;
+.menuItem{
+    font-weight: 600;
+    font-size: 25px;
+    margin: 5px 5px;
+    padding: 5px 10px;
+    display: flex;
+    color: white;
+    justify-content: left;
+    align-items: center;
+    fill: #fff;
+}
+
+.menuItem #menu-active{
+    color: #1da1f2;
+    fill: #1da1f2;
+    font: bold;
+}
+
+.menuItem .twitter-menu-icon .menu-icon:hover{
+    font-size: 28px;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
+
+.menuItem:hover {
+    background: rgba(29, 160, 242, 0.089);
+    color: #1DA1F2;;
+    border-radius: 25px;
     text-decoration: none;
-    margin-right: 25px;
+    fill: #1DA1F2;;
+}
+
+.menuItem .menu-text{
+  justify-content: right;
+  margin-left: 10px;
+}
+
+.menuItem .menu-icon{
+    justify-content: left;
+    width: fit-content;
+    height: fit-content;
+    margin-right: 10px;
 
 }
+
+.menuItem .menu-icon svg{
+    height: 1.75rem;
+    color: white;
+} 
+
 
 .menuIco {
     width: 31px;
@@ -144,49 +189,27 @@ h2 {
     margin-left:-15px;
 }
 
-.perfil {
-    border: 1px solid #e6ecf0;
-    background: #fff;
-    position: relative;
+.perfil-menu {
+    position: fixed;
     margin-bottom: 10px;
     display: block;
     width: 100%;
 }
 
-.profileTop {
-    height: 95px;
-    background-color: #1DA1F2
+.form-icon-svg{
+    height: 25px;
+    fill: #1da1f2;
 }
 
-.profilePainel {
-    padding-right: 10px;
-    padding-left: 10px;
+.icon-tweet{
+    align-self: center;
 }
 
-.profilePainelNome {
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 25px;
+.icon-tweet:hover{
+    background: rgba(29, 160, 242, 0.089);
+    border-radius: 100%;
 }
 
-.profilePainelItem  {
-    color: #657786;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: .02em;
-    line-height: 16px;
-    overflow: hidden;
-    transition: color .15s ease-in-out;
-}
-
-.profilePainelItemValor {
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    padding-top: 3px;
-    transition: color .15s;
-    color: #1DA1F2 !important;
-}
 
 .tweetBox {
     border-top-left-radius: inherit;
@@ -195,7 +218,7 @@ h2 {
     padding:25px;
 }
 
-.whoToFollow {
+.aside {
     border-radius: 15px;
     background-color: rgb(25, 39, 52);
     position: relative;
@@ -208,13 +231,13 @@ h2 {
     padding-bottom: 10px;
 }
 
-.whoToFollowTitulo {
+.asideTitle {
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
 }
 
-.whoToFollowTxt, .whoToFollowTxt:hover {
+.asideTxt, .asideTxt:hover {
     color: #1DA1F2;
     text-decoration: none;
     font-size: 12px;
@@ -222,9 +245,8 @@ h2 {
 }
 
 .tweet {
-    padding:15px;
+    padding:10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    
     cursor: pointer;
 }
 

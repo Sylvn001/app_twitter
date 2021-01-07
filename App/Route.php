@@ -52,7 +52,7 @@ class Route extends Bootstrap {
         $routes['who_to_follow'] = array(
             'route' => '/who_to_follow',
             'controller' => 'AppController',
-            'action' => 'whoToFollow'
+            'action' => 'aside'
         );
 
         $routes['action'] = array(

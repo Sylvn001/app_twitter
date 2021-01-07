@@ -44,7 +44,7 @@ class AppController extends Action{
         }
     }
 
-    public function whoToFollow(){
+    public function aside(){
         $this->loginValidate();
 
         $searchName = isset($_GET['search']) ? $_GET['search'] : '';
@@ -58,7 +58,7 @@ class AppController extends Action{
         }
       
         $this->view->users = $users;
-        $this->render('whoToFollow');
+        $this->render('aside');
     }
 
     public function action(){
