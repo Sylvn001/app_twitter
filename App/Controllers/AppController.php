@@ -28,13 +28,21 @@ class AppController extends Action{
     public function tweet(){
         $this->loginValidate();
 
+        echo 'to aqui bro <pre>';
+        print_r($_POST);
+        echo '</pre> <pre>'; 
+        print_r($_FILES);
+
+        /*
         $tweet = Container::getModel('Tweet');
         $tweet->__set('tweet', $_POST['tweet']);
         $tweet->__set('id_user', $_SESSION['id']);
+
         
         $tweet->save();
 
         header('Location: /timeline');
+        */
     }
 
     public function loginValidate(){

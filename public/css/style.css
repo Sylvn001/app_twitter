@@ -58,6 +58,18 @@ h2 {
     border: none;
 }
 
+.tweet-perfil-img{
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+    object-fit: fill;
+    object-position: center;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    
+}
 
 .btn-primary{
     background-color: #1da1f2;
@@ -127,6 +139,7 @@ h2 {
     color: white
 }
 
+
 .menuItem{
     font-weight: 600;
     font-size: 25px;
@@ -145,6 +158,49 @@ h2 {
     font: bold;
 }
 
+.tweet-footer-icons{
+    fill: #8095a5;
+    height: 20px;
+}
+.delete-container:hover{
+    background: rgba(29, 160, 242, 0.089);
+    border-radius: 50px;
+    fill: #1da1f2;
+}
+
+.deleteIcon:hover{
+    fill: #1da1f2;
+}
+
+.tweet-footer-icons:hover{
+    background: #192734;
+    border-radius: 50px;
+}
+
+.tweet-img{
+    width: 500px;
+    height: 275px;
+    border-radius: 25px;
+    margin-top: 10px;
+    object-fit: fill;
+    object-position: center;
+}
+#cancel-img{
+    background: rgba(4, 24, 36, 0.568);
+    top: 7%;
+    left: 2%;
+    border-radius: 25px;
+    padding: 5px;
+    cursor: pointer;
+}
+#cancel-img:hover{
+    background: rgba(4, 24, 36, 0.671);
+}
+#cancel-img svg{
+    fill: white;   
+    height: 30px;
+}
+ 
 .menuItem .twitter-menu-icon .menu-icon:hover{
     font-size: 28px;
     display: inline-block;
@@ -245,7 +301,6 @@ h2 {
 }
 
 .tweet {
-    padding:10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
 }
