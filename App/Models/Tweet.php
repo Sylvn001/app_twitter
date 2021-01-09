@@ -54,6 +54,27 @@ class Tweet extends Model{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getTweetImage(){
+        $sql = "SELECT image FROM tweets WHERE id = :id AND id_user = :id_user";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $this->__get('id'));
+        $stmt->bindValue(':id_user', $this->__get('id_user'));
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['image'];
+
+    }
+
+    public function destroy(){
+        $sql = "DELETE from tweets where id = :id  AND id_user = :id_user";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $this->__get('id'));
+        $stmt->bindValue(':id_user', $this->__get('id_user'));
+        $stmt->execute();
+
+        return true;
+    }
+
 
 
 }

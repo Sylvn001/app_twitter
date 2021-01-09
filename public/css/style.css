@@ -75,8 +75,12 @@ h2 {
     background-color: #1da1f2;
    
 }
-.btn-primary-outline{
+.btn-outline-primary{
     border-color: #1da1f2;
+    color: #1da1f2;
+}
+.btn-outline-primary:hover{
+    background: #1da1f2!important;
 }
 .btn{
     font-weight: 700;
@@ -328,4 +332,38 @@ h2 {
 .subjects-titles{
     font-size: 18px;
     font-weight: 700;
+}
+
+.card{
+    background-color: transparent;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+}
+
+.profile-follow{
+    text-transform: capitalize;
+    padding: 10px 15px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-follow:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.062);
+}
+
+.btn-link-profile{
+    display: flex;
+    align-items: center;
+    height: 65%;
+    right: 0;
+    width: max-content;
+}
+
+.form-input-who-to-follow{
+    border-radius: 50px;
+    background: #253341;
 }

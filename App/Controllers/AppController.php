@@ -83,7 +83,7 @@ class AppController extends Action{
         }
     }
 
-    public function aside(){
+    public function whoToFollow(){
         $this->loginValidate();
 
         $searchName = isset($_GET['search']) ? $_GET['search'] : '';
@@ -97,7 +97,7 @@ class AppController extends Action{
         }
       
         $this->view->users = $users;
-        $this->render('aside');
+        $this->render('whoToFollow');
     }
 
     public function action(){
@@ -117,5 +117,44 @@ class AppController extends Action{
 
         header('Location: /who_to_follow');
         
+    }
+
+    public function deletePost(){
+        $this->loginValidate();
+
+        $tweet = Container::getModel('Tweet');
+
+        $tweet->__set('id_user', $_SESSION['id']);
+        $tweet->__set('id', $_POST['id_tweet']);
+
+        //destroy file
+        $fileName = $tweet->getTweetImage();
+
+        if(file_exists($fileName)){
+            unlink($fileName);
+        }
+
+        $tweet->destroy();
+
+        return header('Location: /timeline');
+
+    }
+
+    public function profile(){
+        $this->loginValidate();
+    
+        $tweet = Container::getModel('Tweet');
+        $tweet->__set('id_user', $_SESSION['id']);
+        $this->view->tweets = $tweet->getAll();
+
+        $user = Container::getModel('User');
+        $user->__set('id', $_SESSION['id']);
+
+        $this->view->info_user       =  $user->getInfoUser();
+        $this->view->total_tweets    =  $user->getTotalTweets();
+        $this->view->total_following =  $user->getTotalFollowing();
+        $this->view->total_followers =  $user->getTotalFollowers();
+
+        $this->render('profile');
     }
 }
