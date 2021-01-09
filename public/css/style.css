@@ -182,7 +182,7 @@ h2 {
     height: 275px;
     border-radius: 25px;
     margin-top: 10px;
-    object-fit: fill;
+    object-fit: cover;
     object-position: center;
 }
 #cancel-img{
@@ -307,4 +307,25 @@ h2 {
 
 .tweet:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.subjects{
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+}
+
+.subjects:hover{
+    background-color: rgba(255, 255, 255, 0.062);
+    cursor: pointer;
+}
+
+.subjects-minimal-text{
+    font-size: 14px;
+    color: #8095a5;
+}
+
+.subjects-titles{
+    font-size: 18px;
+    font-weight: 700;
 }

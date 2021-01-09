@@ -10,6 +10,7 @@ class Tweet extends Model{
    private $id_user;
    private $tweet;
    private $data;
+   private $image;
 
    public function __get($attr){
        return $this->$attr;
@@ -20,10 +21,11 @@ class Tweet extends Model{
     }
 
     public function save(){
-        $sql = "INSERT  INTO tweets (tweet, id_user) VALUES (:tweet, :id_user)";
+        $sql = "INSERT  INTO tweets (tweet, id_user, image) VALUES (:tweet, :id_user, :image)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':tweet', $this->__get('tweet'));
         $stmt->bindValue(':id_user', $this->__get('id_user'));
+        $stmt->bindValue(':image', $this->__get('image'));
         $stmt->execute();
 
     }
@@ -34,6 +36,7 @@ class Tweet extends Model{
                     t.id_user, 
                     u.name, 
                     t.tweet, 
+                    t.image,
                     DATE_FORMAT(t.data, '%d/%m/%y %H: %i') as data 
                 FROM 
                     tweets AS t 
@@ -50,6 +53,7 @@ class Tweet extends Model{
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
 
 
 }

@@ -28,21 +28,52 @@ class AppController extends Action{
     public function tweet(){
         $this->loginValidate();
 
-        echo 'to aqui bro <pre>';
-        print_r($_POST);
-        echo '</pre> <pre>'; 
-        print_r($_FILES);
-
-        /*
         $tweet = Container::getModel('Tweet');
         $tweet->__set('tweet', $_POST['tweet']);
         $tweet->__set('id_user', $_SESSION['id']);
 
-        
-        $tweet->save();
+        //insert image in post if exist
+        if($_FILES['img']['name'] != "" && $_FILES['img']['error'] == 0){
+            //verify file size 
+            if($_FILES['img']['size'] > 1000000){
+                header('Location: /timeline?erro=size');
+                return;
+            }
+
+            //verify extension
+            $fileExtension = basename($_FILES['img']['type']);
+            $arrayExtensionsAllowed = ['jpg' , 'png' , 'gif' , 'jpeg'];
+
+            if(!in_array($fileExtension,$arrayExtensionsAllowed)){
+                header('Location: /timeline?erro=extension');
+                return;
+            }
+
+            //directory contain all post of users
+            $target_dir = "img/users/" . $_SESSION['id']  . '/posts/';
+
+            //create dir with id of user and post dir if path not exist
+            if (!file_exists($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+
+            //Generate Random Unique Name
+            $fileName = $_SESSION['name'] . '_';
+            $fileName .= date('H:m:s') . '_' . $_SESSION['id'];
+            $fileName = str_replace(':' , "", $fileName);            
+            
+            //full string with path, name and extension
+            $target_dir .= $fileName . ".". $fileExtension;
+            $tweet->__set('image',$target_dir);
+
+            move_uploaded_file($_FILES['img']['tmp_name'], $target_dir);
+            $tweet->save();
+        }else if($_POST['tweet'] != ""){
+            $tweet->save();
+        }
 
         header('Location: /timeline');
-        */
+
     }
 
     public function loginValidate(){
