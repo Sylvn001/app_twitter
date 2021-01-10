@@ -385,6 +385,10 @@ h2 {
     border-radius: 100%;
 }
 
+.img-perfil{
+    object-fit: cover;
+}
+
 .perfil-header{
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -482,4 +486,21 @@ h2 {
     opacity: 0.7;
     transition: 0.5s;
     cursor: pointer;
+}
+
+.page-link{
+    background-color: #253341;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #2991d1;
+}
+
+
+.page-link:hover{
+    color: #2991d1;
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 160, 242, 0.089);
+}
+
+.disabled .page-link{
+    background-color: #8095a5;
 }
