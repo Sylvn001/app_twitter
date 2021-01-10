@@ -21,6 +21,7 @@ class AppController extends Action{
         $this->view->total_tweets    =  $user->getTotalTweets();
         $this->view->total_following =  $user->getTotalFollowing();
         $this->view->total_followers =  $user->getTotalFollowers();
+        $this->view->image =            $user->getProfileImage();
 
         $this->render('timeline');
     }
@@ -144,17 +145,74 @@ class AppController extends Action{
         $this->loginValidate();
     
         $tweet = Container::getModel('Tweet');
-        $tweet->__set('id_user', $_SESSION['id']);
-        $this->view->tweets = $tweet->getAll();
+        $tweet->__set('id_user', $_GET['id']);
+        $this->view->tweets = $tweet->getUserAll();
 
         $user = Container::getModel('User');
-        $user->__set('id', $_SESSION['id']);
+        $user->__set('id', $_GET['id']);
 
         $this->view->info_user       =  $user->getInfoUser();
         $this->view->total_tweets    =  $user->getTotalTweets();
         $this->view->total_following =  $user->getTotalFollowing();
         $this->view->total_followers =  $user->getTotalFollowers();
+        $this->view->image =            $user->getProfileImage();
+        $this->view->location =            $user->getProfileLocation();
+        $this->view->aniversary =            $user->getProfileAniversary();
+        $this->view->bio =            $user->getProfileBio();
 
         $this->render('profile');
+    }
+
+    public function update(){
+        $this->loginValidate();
+
+        echo '<pre>';
+
+        $user = Container::getModel('User');
+        $user->__set('id', $_SESSION['id']);
+        $user->__set('bio', $_POST['bio']);
+        $user->__set('name', $_POST['name']);
+        $user->__set('location', $_POST['location']);
+        $user->__set('aniversary', $_POST['aniversary']);
+        
+        if($_FILES['img']['name'] != ""){
+               //verify file size 
+            if($_FILES['img']['size'] > 1000000){
+                header("Location: /profile?id={$_SESSION['id']}");
+                return;
+            }
+
+            //verify extension
+            $fileExtension = basename($_FILES['img']['type']);
+            $arrayExtensionsAllowed = ['jpg' , 'png' , 'gif' , 'jpeg'];
+
+            if(!in_array($fileExtension,$arrayExtensionsAllowed)){
+                header("Location: /profile?id={$_SESSION['id']}");
+                return;
+            }
+
+
+            $target_dir = "img/users/{$_SESSION['id']}/profile/";
+
+            if(!file_exists($target_dir)){
+                mkdir($target_dir);
+            } 
+
+            $fileName = "profile_user_" . $_SESSION['id'] . "." . $fileExtension;
+            $urlPath = $target_dir . basename($fileName);
+
+            if (move_uploaded_file($_FILES["img"]["tmp_name"], $urlPath)) {
+                $user->__set('image', $urlPath);
+            }else{
+                return;
+            }
+
+        }else{
+            $imageURL = $user->getProfileImage()['image'];
+            $user->__set('image', $imageURL);
+        }
+
+        $user->update();
+        header("location: /profile?id={$_SESSION['id']}");
     }
 }

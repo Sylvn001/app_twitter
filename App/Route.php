@@ -73,6 +73,12 @@ class Route extends Bootstrap {
             'action' => 'action'
         );
 
+        $routes['editProfile'] = array(
+            'route' => '/editProfile',
+            'controller' => 'AppController',
+            'action' => 'update'
+        );
+
         $this->setRoutes($routes);
     }
 

@@ -10,6 +10,10 @@ class User extends Model{
    private $name;
    private $email;
    private $password;
+   private $bio;
+   private $location;
+   private $aniversary;
+   private $image;
 
    public function __get($attr){
        return $this->$attr;
@@ -29,6 +33,19 @@ class User extends Model{
        $stmt->execute();
        return $this;
    }
+
+   public function update(){
+    $sql = "UPDATE users SET name = :name, bio = :bio, location = :location, image = :image, aniversary = :aniversary WHERE id = :id;";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':name' , $this->__get('name'));
+    $stmt->bindValue(':bio', $this->__get('bio'));
+    $stmt->bindValue(':location', $this->__get('location'));
+    $stmt->bindValue(':image', $this->__get('image'));
+    $stmt->bindValue(':aniversary', $this->__get('aniversary'));
+    $stmt->bindValue(':id', $this->__get('id'));
+    $stmt->execute();
+    return $this;
+    }
 
    //validate
    public function validateData(){
@@ -73,9 +90,19 @@ class User extends Model{
        if($user['id'] != '' && $user['name'] != ''){
            $this->__set('id', $user['id']);
            $this->__set('name', $user['name']);
+           
        }
     
     return $this;
+   }
+
+   public function getProfileImage(){
+    $sql = "SELECT image FROM users WHERE id = :id";
+    $stmt =  $this->db->prepare($sql);
+    $stmt->bindValue(':id', $this->__get('id'));
+    $stmt->execute();
+
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
    }
 
    public function getAll(){
@@ -159,6 +186,41 @@ class User extends Model{
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getProfileLocation(){
+        $sql = "SELECT location FROM users  WHERE id = :id_user";
+        $stmt= $this->db->prepare($sql);
+        $stmt->bindValue(':id_user', $this->__get('id'));
+        $stmt->execute();
 
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    } 
+
+    public function getProfileAniversary(){
+        $sql = "SET lc_time_names = 'pt_BR';";
+        $stmt= $this->db->prepare($sql);
+        $stmt->execute();
+
+
+        $sql = "SELECT 
+                    aniversary,
+                    monthname(aniversary) as month, 
+                    DAYOFWEEK(aniversary) as day, 
+                    YEAR(aniversary) as year
+                from users WHERE id = :id_user";
+        $stmt= $this->db->prepare($sql);
+        $stmt->bindValue(':id_user', $this->__get('id'));
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    } 
+
+    public function getProfileBio(){
+        $sql = "SELECT bio FROM users  WHERE id = :id_user";
+        $stmt= $this->db->prepare($sql);
+        $stmt->bindValue(':id_user', $this->__get('id'));
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    } 
 
 }

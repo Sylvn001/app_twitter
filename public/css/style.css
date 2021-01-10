@@ -62,7 +62,7 @@ h2 {
     width:50px;
     height:50px;
     border-radius: 50px;
-    object-fit: fill;
+    object-fit: cover;
     object-position: center;
     margin: 0;
     padding: 0;
@@ -278,6 +278,7 @@ h2 {
     padding:25px;
 }
 
+
 .aside {
     border-radius: 15px;
     background-color: rgb(25, 39, 52);
@@ -366,4 +367,119 @@ h2 {
 .form-input-who-to-follow{
     border-radius: 50px;
     background: #253341;
+}
+
+.perfil-info-tweets{
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.perfil-icon{
+    height: 25px;
+    fill: #1da1f2;
+}
+
+.arrow:hover{
+    background: rgba(29, 160, 242, 0.089);
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.perfil-header{
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
+    position: relative;
+    width: 100%;
+    height: 200;
+    background: #3D5466;
+    margin-bottom: 2em;
+    display: inline-block
+}
+
+
+.profile-header__image{
+    position: absolute;
+    top: 65%;
+    border-radius: 50%;
+    border-bottom: #8095a5;
+}
+
+.profile-header__image img{
+    margin-left: 1em;
+    border-radius: 100%;
+    width: 135px;
+    height: 135px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profile-body{
+    margin-top: 3em;
+    margin-left: 1em;
+    bottom: 0;  
+}
+
+.profile-small-text{
+    color: #8095a5;
+    font-size: 16px;
+}
+
+.profile-nav a{
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.profile-nav a:hover{
+    background: rgba(29, 160, 242, 0.089);
+}
+
+.profile-nav a.active{
+    border-bottom:2px solid #1da1f2;
+    color: #1da1f2;
+}
+
+.profile-small-icons-info{
+    height: 20px;
+    fill: #8095a5;
+}
+
+.edit-button{
+    position: absolute;
+    display: flex;
+    justify-content: end;
+    right: 5%;
+}
+
+.profile-name-box{
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tweet-border{
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-content{
+    background-color: #15202B;
+}
+
+.border{
+    border-color: rgba(255, 255, 255, 0.2)!important;
+}
+
+.form-control{
+    background: none;
+    border: none;
+}
+
+.form-control:focus{
+    border: none;
+    background: none;
+}
+
+#view-img-profile-form:hover{
+    opacity: 0.7;
+    transition: 0.5s;
+    cursor: pointer;
 }
