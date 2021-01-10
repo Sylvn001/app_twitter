@@ -102,7 +102,7 @@
 
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-6 mb-3">
 			<div class="row tweet-border">
 				<div class="col  p-0 mt-0">
 					<div class="d-flex mb-0 p-0 profile-name-box ">
@@ -126,6 +126,12 @@
 						<div class="ml-0 mr-0 edit-button">
 						<?php if($_GET['id'] == $_SESSION['id']) { ?> 
 							<button class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar Perfil</button>
+						<?php } ?>
+						<?php if($this->view->follow == 0) { ?>
+								<a href="/action?home=profile&act=follow&id_user=<?= $_GET['id'] ?>" class="btn btn-outline-primary btn-link-profile">Seguir</a>
+						<?php } ?>
+						<?php if($this->view->follow == 1) { ?>
+								<a href="/action?home=profile&act=unfollow&id_user=<?= $_GET['id'] ?>" class="btn btn-primary btn-link-profile">Seguindo</a>
 						<?php } ?>
 						</div>
 

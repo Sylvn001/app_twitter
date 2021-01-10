@@ -12,16 +12,28 @@ class AppController extends Action{
     
         $tweet = Container::getModel('Tweet');
         $tweet->__set('id_user', $_SESSION['id']);
-        $this->view->tweets = $tweet->getAll();
-
+        
         $user = Container::getModel('User');
         $user->__set('id', $_SESSION['id']);
+        
+        $limit = 10;
+        $offset = 0;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1 ;
 
+        $offset = ($page - 1) * 10; 
+
+        $tweets = $tweet->getPaginate($limit, $offset);
+        $total_tweets = $tweet->getTotalTweets();
+        $total_pages = ceil($total_tweets['total'] / $limit);
+
+        $this->view->total_pages     =  $total_pages;
+        $this->view->tweets          =  $tweets;
         $this->view->info_user       =  $user->getInfoUser();
         $this->view->total_tweets    =  $user->getTotalTweets();
         $this->view->total_following =  $user->getTotalFollowing();
         $this->view->total_followers =  $user->getTotalFollowers();
-        $this->view->image =            $user->getProfileImage();
+        $this->view->image           =  $user->getProfileImage();
+        $this->view->active          =  $page;
 
         $this->render('timeline');
     }
@@ -106,6 +118,7 @@ class AppController extends Action{
 
         $action = isset($_GET['act']) ? $_GET['act'] : '' ;
         $id_user_following = isset($_GET['id_user']) ? $_GET['id_user'] : '' ;
+        $home = isset($_GET['home']) ? $_GET['home'] : '' ;
 
         $user = Container::getModel('User');
         $user->__set('id', $_SESSION['id']);
@@ -114,6 +127,10 @@ class AppController extends Action{
             $user->followUser($id_user_following);
         }else if($action == 'unfollow'){
             $user->unfollowUser($id_user_following);
+        }
+
+        if($home == 'profile'){
+            header("Location: /profile?id=$id_user_following");
         }
 
         header('Location: /who_to_follow');
@@ -151,6 +168,8 @@ class AppController extends Action{
         $user = Container::getModel('User');
         $user->__set('id', $_GET['id']);
 
+        $follow = $user->getUserFollowed($_SESSION['id'])['follow'];
+
         $this->view->info_user       =  $user->getInfoUser();
         $this->view->total_tweets    =  $user->getTotalTweets();
         $this->view->total_following =  $user->getTotalFollowing();
@@ -159,14 +178,13 @@ class AppController extends Action{
         $this->view->location =            $user->getProfileLocation();
         $this->view->aniversary =            $user->getProfileAniversary();
         $this->view->bio =            $user->getProfileBio();
+        $this->view->follow = $follow;
 
         $this->render('profile');
     }
 
     public function update(){
         $this->loginValidate();
-
-        echo '<pre>';
 
         $user = Container::getModel('User');
         $user->__set('id', $_SESSION['id']);
@@ -195,11 +213,12 @@ class AppController extends Action{
             $target_dir = "img/users/{$_SESSION['id']}/profile/";
 
             if(!file_exists($target_dir)){
-                mkdir($target_dir);
+                mkdir($target_dir, 0777, true);
             } 
 
             $fileName = "profile_user_" . $_SESSION['id'] . "." . $fileExtension;
             $urlPath = $target_dir . basename($fileName);
+
 
             if (move_uploaded_file($_FILES["img"]["tmp_name"], $urlPath)) {
                 $user->__set('image', $urlPath);

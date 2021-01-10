@@ -25,11 +25,13 @@ class User extends Model{
 
    //save
    public function save(){
-       $sql = "INSERT INTO users (name, email, password) values (:name , :email, :password)";
+       $sql = "INSERT INTO users (name, email, aniversary, password, image) values (:name , :email, :aniversary, :password, :image)";
        $stmt = $this->db->prepare($sql);
        $stmt->bindValue(':name' , $this->__get('name'));
        $stmt->bindValue(':email', $this->__get('email'));
+       $stmt->bindValue(':aniversary', $this->__get('aniversary'));
        $stmt->bindValue(':password', $this->__get('password'));
+       $stmt->bindValue(':image', $this->__get('image'));
        $stmt->execute();
        return $this;
    }
@@ -106,7 +108,7 @@ class User extends Model{
    }
 
    public function getAll(){
-       $sql = "SELECT u.id, u.name, u.email, 
+       $sql = "SELECT u.id, u.name, u.email, u.image,
                 (
                     SELECT 
                         count(*)
@@ -149,6 +151,16 @@ class User extends Model{
 
     return true;
    }
+
+   public function getUserFollowed($id_user){
+       $sql = "SELECT count(*) as follow FROM user_followers where id_user = :id_user and id_user_following = :id_user_following ;";
+       $stmt = $this->db->prepare($sql);
+       $stmt->bindValue(':id_user',$id_user);
+       $stmt->bindValue(':id_user_following', $this->__get('id'));
+       $stmt->execute();
+   
+       return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 
    public function getInfoUser(){
        $sql = "SELECT name FROM users WHERE id = :id_user";
